@@ -24,7 +24,7 @@ Credstash.prototype.get = function(name, options, done) {
 
   return async.waterfall([
     async.apply(secrets.get, this.table, name, options),
-    async.apply(keys.decrypt),
+    async.apply(keys.decrypt, options),
     async.apply(hmac.check),
     async.apply(decrypter.decrypt)
   ], function (err, secrets) {
